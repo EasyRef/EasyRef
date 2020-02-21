@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200130115152_Fifth.cs" />
+    <Compile Remove="Migrations\20200130115152_Fifth.Designer.cs" />
+    <Compile Remove="Migrations\20200130115502_Sixth.cs" />
+    <Compile Remove="Migrations\20200130115502_Sixth.Designer.cs" />
+    <Compile Remove="Migrations\20200130115645_Seven.cs" />
+    <Compile Remove="Migrations\20200130115645_Seven.Designer.cs" />
+    <Compile Remove="Migrations\20200130120046_eight.cs" />
+    <Compile Remove="Migrations\20200130120046_eight.Designer.cs" />
+    <Compile Remove="Migrations\20200130120602_Nine.cs" />
+    <Compile Remove="Migrations\20200130120602_Nine.Designer.cs" />
+    <Compile Remove="Migrations\20200130121331_Ten.cs" />
+    <Compile Remove="Migrations\20200130121331_Ten.Designer.cs" />
+    <Compile Remove="Migrations\20200130122018_Eleven.cs" />
+    <Compile Remove="Migrations\20200130122018_Eleven.Designer.cs" />
+    <Compile Remove="Migrations\20200130122546_Twelve.cs" />
+    <Compile Remove="Migrations\20200130122546_Twelve.Designer.cs" />
+    <Compile Remove="Migrations\20200130123016_nine.cs" />
+    <Compile Remove="Migrations\20200130123016_nine.Designer.cs" />
+    <Compile Remove="Migrations\20200130123812_eleven.cs" />
+    <Compile Remove="Migrations\20200130123812_eleven.Designer.cs" />
+    <Compile Remove="Migrations\20200130123953_twelve.cs" />
+    <Compile Remove="Migrations\20200130123953_twelve.Designer.cs" />
+    <Compile Remove="Migrations\20200130124047_thirt.cs" />
+    <Compile Remove="Migrations\20200130124047_thirt.Designer.cs" />
+    <Compile Remove="Migrations\20200130124544_forthy.cs" />
+    <Compile Remove="Migrations\20200130124544_forthy.Designer.cs" />
+    <Compile Remove="Migrations\20200131125907_Remake-2.cs" />
+    <Compile Remove="Migrations\20200131125907_Remake-2.Designer.cs" />
+    <Compile Remove="Migrations\20200131130814_Remake-2.cs" />
+    <Compile Remove="Migrations\20200131130814_Remake-2.Designer.cs" />
+    <Compile Remove="Migrations\20200131143409_Remake-7.cs" />
+    <Compile Remove="Migrations\20200131143409_Remake-7.Designer.cs" />
+    <Compile Remove="Migrations\20200203073001_SecondCreate.cs" />
+    <Compile Remove="Migrations\20200203073001_SecondCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200203082509_Remake-4.cs" />
+    <Compile Remove="Migrations\20200203082509_Remake-4.Designer.cs" />
+    <Compile Remove="Migrations\20200204093839_Version2_2.cs" />
+    <Compile Remove="Migrations\20200204093839_Version2_2.Designer.cs" />
+    <Compile Remove="Migrations\20200204100518_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200204100518_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200204102429_Remake-1.cs" />
+    <Compile Remove="Migrations\20200204102429_Remake-1.Designer.cs" />
+    <Compile Remove="Migrations\20200204102620_Remake-1.cs" />
+    <Compile Remove="Migrations\20200204102620_Remake-1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Node.js" Version="5.3.0" />
+  </ItemGroup>
+
+
+</Project>
