@@ -11,7 +11,7 @@ namespace EasyRefCore.Models
     {
         public Game() { }
 
-        
+        //testar branch och pusch, går att ta bort denna kommentar
         public int GameId { get; set; }
         public int? CoachId { get; set; }
    
