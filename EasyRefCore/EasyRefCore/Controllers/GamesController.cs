@@ -25,6 +25,7 @@ namespace EasyRefCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
+            //Test
             return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender).Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).AsNoTracking().ToListAsync();
           // return await _context.Game.ToListAsync();
         }
