@@ -2,7 +2,7 @@
  <template>
 <div class="container">
   <h1 class="text-center game-header">Matcher</h1>
-
+<AddGame/>
 
   <div class="games-list-div" v-for="data in games" :key="data.id">
 
@@ -127,24 +127,25 @@
 </ul> 
 
 </div>
+
 </template>
 
 <script>
 //Import Axios för API anropr, Moment för datetime formatering.
+
 import axios from 'axios';
 import moment from 'moment';
-import 'moment/locale/sv' 
+import 'moment/locale/sv';
+
 export default {
  name: 'games',
+ components: {
+
+  },
  month: '',
  active: false,
+ 
   
-  props: {
-    msg: String
-  },
-  components: {
-   
-  },
   data() {
     return {
       games: [],
@@ -265,16 +266,18 @@ background: #3bcc12;
 }
 
 .month-row {
-    background-color: #092c52;
+    background-color: var(--easyref-redBg);
     color: white;
     text-transform: uppercase;
-    margin-bottom: 2px;
-    background-image: linear-gradient(#0e3f75,#092c52);
+    margin-bottom: 6px;
+    margin-top: 6px;
+    padding: 6px;
+    background-image: linear-gradient(var(--easyref-red),var(--easyref-bg-darken));
    
 }
 
 ul li .month-row {
-  border-bottom: 2px solid #092c52;
+  border-bottom: 2px solid var(--easyref-bg);
   margin-bottom: 12px;
   padding: 12px;
   text-transform: uppercase;
@@ -284,10 +287,10 @@ ul li .month-row {
 } 
 
 .games-list-div {
-   background: #ededed;
+   background: var(--easyref-white);
         
         width: 100%;
-       background-color: #092c52;
+       background-color: var(--easyref-bg);
         margin-top: 1px;
         display: flex;
         flex-direction: column;
@@ -295,7 +298,7 @@ ul li .month-row {
         
 }
 .game-list:hover {
-   border-left: 10px solid black;
+   border-left: 6px solid var(--easyref-red);
  
     background: #ffffff;
 }
@@ -319,7 +322,7 @@ ul {
     flex-wrap: wrap;
 }
 ul li {
- background: #ededed;
+ background: var(--easyref-white);
         padding: 1em;
         width: 100%;
        

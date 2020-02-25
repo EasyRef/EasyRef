@@ -25,7 +25,7 @@ import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import svLocale from '@fullcalendar/core/locales/sv';
-
+import $ from 'jquery'
 
 export default {
  
@@ -66,16 +66,14 @@ console.log(process.env.VUE_APP_BASE_URL)
         start: res.data[idx].startDate,
         end: res.data[idx].endDate,
         title: res.data[idx].homeTeam + " - " + res.data[idx].awayTeam,
-        backgroundColor: 'yellow',
-        extendedProps: {
-          test: 'test'
-        },
-        description: 'test'
     });
   }
-  console.log(this.calendarEvents)
+  
   
 });
+// $(".fc-button").css("background","var(--easyref-calFunc)");
+ $(".fc-button").css("color","black");
+
 
 }
 }

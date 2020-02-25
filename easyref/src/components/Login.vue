@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 
+
 .login-container {
     position: relative;
     left: 0;
@@ -74,7 +75,7 @@ export default {
     margin: auto;
     padding-top: 80px;
     padding-bottom: 40px;
-    background-color: #b52d2d;
+    background-color: var(--easyref-red);
     width: 300px;
      border: 1px solid #ffffff;
      border-radius: 6px;
@@ -86,12 +87,12 @@ export default {
 }
 
 .login-btn {
-    background-color:  #b52d2d;
+    background-color:  var(--easyref-red);
     border: 1px solid #ffffff !important;
     color: white !important;
 }
 .login-btn:hover {
-    background-color: #d63636 !important;
+    background-color: var(--easyref-bg-darken) !important;
 }
 
 .login-container h3 {

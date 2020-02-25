@@ -50,7 +50,8 @@ import AddGame from './components/AddGame.vue'
 export default {
   name: 'app',
   components: {
-  AddGame
+    AddGame
+ 
   },
   data() {
     return {
@@ -64,48 +65,66 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
 
+:root{
+    --easyref-red: #cc3828;
+    --easyref-redBg: #cc3828;
+    --easyref-bg: #d4d4d4;
+    --easyref-bg-darken: #ab2d1f;
+    --easyref-white: #ffffff;
+    --easyref-firstRef: #32e02f;
+    --easyref-secondRef:#f2ec29;
+    --easyRef-thirdRef: #f01313;
+    --easyRef-coach: #bcbda8;
+    --easyref-calFunc: #fbff03 ;
+}
+
 body {
-  background-color:#092c52 !important;
+  background-color:var(--easyref-bg) !important;
   font-family: 'Montserrat', sans-serif !important;
 }
 
 .game-btn {
-    background-color: #092c52 !important;
+    background-color: var(--easyref-red)!important;
     border: 1px solid #ffffff !important;
     color: white !important;
+    text-transform: uppercase;
 }
 .game-btn:hover {
-    background-color: #1b518b !important;
+    background-color: var(--easyref-bg-darken) !important;
 }
 .game-header {
    text-transform: uppercase;
     border: 1px solid #ffffff;
     padding: 20px;
     text-align:left;
-    background-color: #092c52;
+    background-color: var(--easyref-bg);
     color: white;
     text-transform: uppercase;
     border-radius: 6px;
      margin-top: 0.5em;
   margin-bottom: 0.5em;
-    background-image: linear-gradient(#0e3f75,#092c52);
+    background-image: linear-gradient(var(--easyref-red),var(--easyref-bg-darken));
 
 /* background-image: linear-gradient(#b52d2d,#f53e3e); */
-  
+
+
 }
+.timeGridDay-btn {
+  color: var(--easyref-bg) !important;
+}  
 .container {
-  width: 40% !important;
+  width: 100% !important;
+ 
 }
 
 .game-btn {
-    background-color: #092c52;
+    background-color: var(--easyref-red);
     border: 1px solid #ffffff;; 
 }
 
 .header-color {
-  background-color: #041930;
+  background-color: var(--easyref-redBg);
   font-weight: bold;
-  color: red;
   text-transform: uppercase;
   
 }
@@ -118,9 +137,6 @@ body {
   color: green !important;
 }
 
-.navbar-nav > .active {
-  color: green;
-}
 
 .head-div h2  {
  
@@ -128,12 +144,12 @@ body {
     font-size: 18px;
     padding: 20px;
     text-align:left;
-    background-color: #092c52;
+    background-color: var(--easyref-bg);
     color: white;
     text-transform: uppercase;
     border-radius: 6px;
     margin-bottom: 2px;
-    background-image: linear-gradient(#0e3f75,#092c52);
+    background-image: linear-gradient(var(--easyref-bg),var(--easyref-bg-darken));
 }
 
 

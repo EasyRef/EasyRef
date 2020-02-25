@@ -2,9 +2,9 @@
 <template>
 
 <div class="add-game-div">
-<h3>Lägg up match</h3>
+<h2>Lägg up match</h2>
 
-<div style="background: white;">
+<div style="background: white; margin-top: -2px;">
     
     <form  >
       <div class="form-row">
@@ -98,7 +98,7 @@
 import axios from 'axios';
 export default {
     //statiska variabler, som kan ändrar under rendering
-  name: 'Home',
+  name: 'AddGame',
   props: {
     msg: String
   },
@@ -197,25 +197,27 @@ export default {
 .add-game-div {
     position: fixed;
     right: 16px;
-    top: 80px;
-    width: 300px;
-     border: 1px solid #ffffff;; 
-     border-radius: 2px;
-    
-    
    
+    width: 300px;
+   
+     border: 1px solid #ffffff;; 
+     border-radius: 2px;  
+     background: var(--easyref-redBg);
+     
 }
-
-.add-game-div h3 {
-    background: #092c52;
+.add-game-div h2 {
+    background: var(--easyref-redBg);
     color: #ffffff;
     text-transform: uppercase;
     font-size: 14px;
     padding: 20px;
+     margin-top: 0.5em;
+  margin-bottom: 0.5em;
     text-align: center;
+   
 }
 input[type=button] {
-  background-color:#092c52;
+  background-color:var(--easyref-red);
 }
 input[type=text] {
   height: 30px;

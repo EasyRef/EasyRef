@@ -78,7 +78,7 @@ ul {
     flex-wrap: wrap;
 }
 ul li {
- background: #ededed;
+ background: var(--easyref-white);
         padding: 1em;
         width: 100%;
        
@@ -99,6 +99,6 @@ ul li {
     text-transform: uppercase;
     border-radius: 6px;
     margin-bottom: 2px;
-    background-image: linear-gradient(#0e3f75,#092c52);
+    background-image: linear-gradient(var(--easyref-red),var(--easyref-bg-darken));
 }
 </style>

@@ -73,7 +73,7 @@ ul li {
 
       margin: 2px;
       padding: 6px 12px;
-      background: rgb(238, 238, 238);   
+      background: var(--easyref-white);   
       display: block;
       width: calc(50% - 4px);
 }
