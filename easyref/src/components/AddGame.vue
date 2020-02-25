@@ -97,10 +97,13 @@
 <script>
 import axios from 'axios';
 export default {
+    //statiska variabler, som kan ändrar under rendering
   name: 'Home',
   props: {
     msg: String
   },
+
+  //Instantiserar reaktiva variabler
   data() {
     return {
      
@@ -129,26 +132,36 @@ export default {
     axios.get(process.env.VUE_APP_BASE_URL+'/api/gamedivisions').then(res => {
       this.division = res.data
       console.log(this.division)
+    }).catch({
+        
     });
 
      axios.get(process.env.VUE_APP_BASE_URL+'/api/gamefieldsizes').then(res => {
        this.fieldSize = res.data;
       console.log(this.fieldSize)
+    }).catch({
+
     });
 
      axios.get(process.env.VUE_APP_BASE_URL+'/api/gamegenders').then(res => {
      this.genders = res.data;
      console.log(this.genders);
+    }).catch({
+
     });
 
      axios.get(process.env.VUE_APP_BASE_URL+'/api/gameages').then(res => {
        this.ages= res.data;
        console.log(this.ages)
 
+    }).catch({
+
     });
      axios.get(process.env.VUE_APP_BASE_URL+'/api/coaches').then(res => {
        this.coaches= res.data;
        console.log(this.coaches)
+
+    }).catch({
 
     });
   },
@@ -166,6 +179,8 @@ export default {
         GameFieldSizeId: this.game.gameFieldSizeId,
         GameDivisonId: this.game.levelId,
         CoachId: this.game.coachId
+      }).catch({
+
       })
     }
   },

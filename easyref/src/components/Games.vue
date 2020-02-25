@@ -64,6 +64,7 @@
       </div>
      
  
+ <!-- IGNORERA, LISTA ISTÄLLET FÖR DIV -->
 <ul v-show="false">
     <li v-for="data in games" :key="data.id">  
       <div class="row month-row" v-if="checkMonth(data.startDate)">
@@ -129,6 +130,7 @@
 </template>
 
 <script>
+//Import Axios för API anropr, Moment för datetime formatering.
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/sv' 
@@ -180,6 +182,7 @@ computed: {
 
 },
 
+//Olika filters för att formatera data under rendering. 
 filters: {
 
   date: function(value) {

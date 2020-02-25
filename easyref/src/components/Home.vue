@@ -5,7 +5,7 @@
  
   <h1 class="text-center game-header">Välkommen!</h1>
   <div class="news-div">
-    <h2>Nyheter</h2>
+    <h2>Fakenews</h2>
 
     <ul>
       <li v-for="data in news" :key="data.key">
@@ -47,13 +47,13 @@ export default {
       },{
         title: 'Sogeti manglar konkurenterna...',
         news: 'Återigen stoltserar sig Sogeti som överlägsna vinnare av Kalle Anka cup på domnarsvallen.'
-         +'Rimsky stod för årets utvisning då han glidtacklade den egna lagkamraten Martin Olsen ut ur Arenan. Detta tack vare en stark nordöstlig bris som precis passerade och drog iväg Martin långt över Dalälven och vidare mot klubbhuset på Aspeboda GK. '
-         +'Där blev han väl omhändertagen av ett äldre par från Hälsingland. De avslutade dagen med 18 hål och slutligen en middag där det samtalades om allt från himmel till jord.',
+         +'Rimsky stod för årets utvisning då han glidtacklade den egna lagkamraten Martin Olsen ut ur Arenan. Detta tack vare en stark nordöstlig bris som precis passerade och drog iväg Martin långt ut över Dalälven vidare mot klubbhuset på Aspeboda GK '
+         +'där han sedan blev väl omhändertagen av ett äldre par från Hälsingland. Dagen avslutades med 18 hål och slutligen en middag där det samtalades om allt från himmel till jord.',
         author: 'Tabue',
         published: '2020-03-17',
       },{
         title: 'Erik Karlsson dominerar...',
-        news: 'Då var det återigen dags att utse årets framgångsrikaste dalmas. Erik Karlsson heter han och intar platsen som Dalarnas trevligaste mas.',
+        news: 'Då var det återigen dags att utse årets framgångsrikaste dalmas. Erik Karlsson heter han och stämmer fiolen med ett brett leende',
         author: 'Tabue',
         published: '2020-03-17',
       },
@@ -87,9 +87,6 @@ ul li {
         flex-direction: column;
         
        
-}
-.news-div {
-
 }
 .news-div h2 {
  
