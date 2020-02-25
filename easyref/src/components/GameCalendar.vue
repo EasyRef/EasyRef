@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2 class="text-center game-header">Kalender</h2>
+  <h1 class="text-center game-header">Kalender</h1>
     <FullCalendar class="calendar-div"
       ref="fullCalendar"
       defaultView="dayGridMonth"
@@ -14,6 +14,7 @@
       :weekends="calendarWeekends"
       :events="calendarEvents"
       :locales="locales"
+      
   
       />
   </div>
@@ -34,11 +35,11 @@ export default {
     msg: String
   },
   components: {
-    FullCalendar // make the <FullCalendar> tag available
+    FullCalendar 
   },
   data: function() {
     return {
-      calendarPlugins: [ // plugins must be defined in the JS
+      calendarPlugins: [
         dayGridPlugin,
         timeGridPlugin
       ],
@@ -47,6 +48,10 @@ export default {
       calendarEvents: [],
       
     }
+  },
+
+  method: {
+   
   },
 
 
@@ -60,7 +65,12 @@ console.log(process.env.VUE_APP_BASE_URL)
         id: res.data[idx].gameId,
         start: res.data[idx].startDate,
         end: res.data[idx].endDate,
-        title: res.data[idx].homeTeam + " - " + res.data[idx].awayTeam
+        title: res.data[idx].homeTeam + " - " + res.data[idx].awayTeam,
+        backgroundColor: 'yellow',
+        extendedProps: {
+          test: 'test'
+        },
+        description: 'test'
     });
   }
   console.log(this.calendarEvents)
@@ -82,6 +92,13 @@ console.log(process.env.VUE_APP_BASE_URL)
   background-color: white; 
   border-radius: 12px;
   padding: 10px;
+}
+
+h1 {
+  border: 1px solid #ffffff;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
 }
 
 </style>
