@@ -4,7 +4,11 @@ import Home from './components/Home.vue'
 import Games from './components/Games.vue'
 import Coach from './components/Coach.vue'
 import Referee from './components/Referee.vue'
+import Login from './components/Login.vue'
 import GameCalendar from './components/GameCalendar.vue'
+import Admin from './components/Admin.vue'
+import Contact from './components/Contact.vue'
+import About from './components/About.vue'
 
 
 Vue.use(Router)
@@ -35,6 +39,26 @@ export default new Router({
         path: '/Referee',
         name: 'referee',
         component: Referee
-      }
+      },
+      {
+      path: '/Login',
+      name: 'login',
+      component: Login
+      },
+      {
+        path: '/Admin',
+        name: 'admin',
+        component: Admin
+        },
+        {
+          path: '/Contact',
+          name: 'contact',
+          component: Contact
+          },
+          {
+            path: '/About',
+            name: 'about',
+            component: About
+            }
   ]
 })
