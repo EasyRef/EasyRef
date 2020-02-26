@@ -25,7 +25,7 @@ import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import svLocale from '@fullcalendar/core/locales/sv';
-import $ from 'jquery'
+
 
 export default {
  
@@ -72,7 +72,7 @@ console.log(process.env.VUE_APP_BASE_URL)
   
 });
 // $(".fc-button").css("background","var(--easyref-calFunc)");
- $(".fc-button").css("color","black");
+ //$(".fc-button").css("color","black");
 
 
 }

@@ -2,7 +2,7 @@
  <template>
 <div class="container">
   <h1 class="text-center game-header">Matcher</h1>
-<AddGame/>
+
 
   <div class="games-list-div" v-for="data in games" :key="data.id">
 

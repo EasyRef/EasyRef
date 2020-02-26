@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="content">
 
   
  <header class="header-color">
@@ -33,13 +33,25 @@
 </nav>
 </div>
 </header>
-<div class="container-fluid">
+<div class="div-bottom">
 
  
 <AddGame/>
 <router-view/>
 
+
 </div>
+<footer>
+  
+    <div class="container">
+      <div class="footer-items">
+      <router-link class="nav-link" to="/about">Om oss</router-link>
+       <router-link class="nav-link" to="/contact">Kontakt</router-link>
+        <router-link class="nav-link" to="/login">GDPR</router-link>
+       </div>
+    </div>
+  </footer>
+
 </div>
 
 </template>
@@ -75,12 +87,58 @@ export default {
     --easyref-secondRef:#f2ec29;
     --easyRef-thirdRef: #f01313;
     --easyRef-coach: #bcbda8;
-    --easyref-calFunc: #fbff03 ;
+    /* --easyref-calFunc: #fbff03 ; */
+    --easyref-calFunc: #e7eb10 ;
+}
+.content {
+
+ flex: 1 0 auto;
+ height: 100vh;
+ display: flex;
+ flex-direction: column;
+  /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+ 
+  
 }
 
+.div-bottom {
+  flex: 1;
+}
+
+
+footer {
+  background: #bcbda8;
+  flex-shrink: 0;
+  margin-top: 20px;
+  padding: 6px 12px;
+  /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+ 
+}
+
+.footer-items a {
+  display:inline-block;
+  color: white;
+  
+}
+
+.footer-items a:hover {
+ 
+  font-weight: bold;
+  color: white;
+}
+
+html , body {
+  height: 100%;
+ 
+}
 body {
   background-color:var(--easyref-bg) !important;
   font-family: 'Montserrat', sans-serif !important;
+   display: flex;
+  flex-direction: column;
+  
+ 
+  
 }
 
 .game-btn {
@@ -114,6 +172,8 @@ body {
 }  
 .container {
   width: 100% !important;
+  min-height: 100% !important;
+  
  
 }
 
@@ -151,6 +211,29 @@ body {
     margin-bottom: 2px;
     background-image: linear-gradient(var(--easyref-bg),var(--easyref-bg-darken));
 }
+.fc-day:hover {
+  background: var(--easyref-bg) !important;
+}
+.fc-button {
+  background: var(--easyref-red) !important;
+  color: white !important;
+}
 
+.fc-center h2 {
+  text-transform: uppercase !important;
+}
+
+.fc-day-header {
+  background: var(--easyref-red) !important;
+  color: white !important;
+}
+
+.fc-time-grid-event {
+  background: var(--easyref-calFunc) !important;
+}
+
+.fc-content {
+  background: var(--easyref-calFunc) !important;
+}
 
 </style>

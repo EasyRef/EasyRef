@@ -197,7 +197,7 @@ export default {
 .add-game-div {
     position: fixed;
     right: 16px;
-   
+    top: 80px;
     width: 300px;
    
      border: 1px solid #ffffff;; 

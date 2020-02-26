@@ -7,6 +7,8 @@ import Referee from './components/Referee.vue'
 import Login from './components/Login.vue'
 import GameCalendar from './components/GameCalendar.vue'
 import Admin from './components/Admin.vue'
+import Contact from './components/Contact.vue'
+import About from './components/About.vue'
 
 
 Vue.use(Router)
@@ -47,6 +49,16 @@ export default new Router({
         path: '/Admin',
         name: 'admin',
         component: Admin
-        }
+        },
+        {
+          path: '/Contact',
+          name: 'contact',
+          component: Contact
+          },
+          {
+            path: '/About',
+            name: 'about',
+            component: About
+            }
   ]
 })
