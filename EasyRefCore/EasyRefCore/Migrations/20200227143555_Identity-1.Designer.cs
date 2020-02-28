@@ -4,14 +4,16 @@ using EasyRefCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyRefCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200227143555_Identity-1")]
+    partial class Identity1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +28,9 @@ namespace EasyRefCore.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Compound")
                         .HasColumnType("nvarchar(max)");
@@ -70,11 +75,17 @@ namespace EasyRefCore.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("PropertiesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
@@ -90,7 +101,11 @@ namespace EasyRefCore.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users");
+                    b.HasIndex("PropertiesId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("EasyRefCore.Models.Coach", b =>
@@ -118,9 +133,51 @@ namespace EasyRefCore.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("CoachId");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Coach");
+                });
+
+            modelBuilder.Entity("EasyRefCore.Models.ExtendedUserTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ExtendedValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExtendedUserTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ExtendedValue = "5 man"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ExtendedValue = "7 man"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ExtendedValue = "9 man"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ExtendedValue = "11 man"
+                        });
                 });
 
             modelBuilder.Entity("EasyRefCore.Models.Game", b =>
@@ -283,11 +340,43 @@ namespace EasyRefCore.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("RefereeId");
 
                     b.HasIndex("FieldSizeId");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Referee");
+                });
+
+            modelBuilder.Entity("EasyRefCore.Models.UserType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "Coach"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "Referee"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -421,6 +510,30 @@ namespace EasyRefCore.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("EasyRefCore.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("EasyRefCore.Models.ExtendedUserTypes", "Properties")
+                        .WithMany("ApplicationUser")
+                        .HasForeignKey("PropertiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EasyRefCore.Models.UserType", "Type")
+                        .WithMany("ApplicationUser")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EasyRefCore.Models.Coach", b =>
+                {
+                    b.HasOne("EasyRefCore.Models.UserType", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EasyRefCore.Models.Game", b =>
                 {
                     b.HasOne("EasyRefCore.Models.ApplicationUser", null)
@@ -473,6 +586,12 @@ namespace EasyRefCore.Migrations
                     b.HasOne("EasyRefCore.Models.GameFieldSize", "FieldSize")
                         .WithMany()
                         .HasForeignKey("FieldSizeId");
+
+                    b.HasOne("EasyRefCore.Models.UserType", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

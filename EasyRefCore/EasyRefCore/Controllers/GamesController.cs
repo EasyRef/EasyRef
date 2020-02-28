@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EasyRefCore.Data;
 using EasyRefCore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EasyRefCore.Controllers
 {
@@ -22,11 +23,13 @@ namespace EasyRefCore.Controllers
         }
 
         // GET: api/Games
+       
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
             //Test
-            return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender).Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).AsNoTracking().ToListAsync();
+            return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender).Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).OrderBy(x => x.StartDate).AsNoTracking().ToListAsync();
           // return await _context.Game.ToListAsync();
         }
 

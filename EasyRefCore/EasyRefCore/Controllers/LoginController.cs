@@ -24,54 +24,54 @@ namespace EasyRefCore.Controllers
         [HttpPost]
         public ActionResult PostGame(LoginModel model)
         {
+            return null;
+        //    UserModel uModel;
 
-            UserModel uModel;
+        //    if (string.Equals(model.UserType, "coach"))
+        //    {
+        //        try
+        //        {
+        //           var coach = _context.Coach.Include(x => x.Role).Where(x => x.Email == model.Email).Where(p => p.Password == model.Password).Single();
 
-            if (string.Equals(model.UserType, "coach"))
-            {
-                try
-                {
-                   var coach = _context.Coach.Include(x => x.Role).Where(x => x.Email == model.Email).Where(p => p.Password == model.Password).Single();
+        //            uModel = new UserModel {
+        //                Id = coach.CoachId,
+        //                FullName = coach.FirstName + " " + coach.LastName,
+        //                Email = coach.Email,
+        //                UserType = "coach",
+        //                UserRole = coach.Role.UserRole
+        //            };
+        //            return Ok(uModel);
 
-                    uModel = new UserModel {
-                        Id = coach.CoachId,
-                        FullName = coach.FirstName + " " + coach.LastName,
-                        Email = coach.Email,
-                        UserType = "coach",
-                        UserRole = coach.Role.UserRole
-                    };
-                    return Ok(uModel);
-
-                } catch(InvalidOperationException ex)
-                {
-                    return BadRequest("Wrong credentials");
-                }
+        //        } catch(InvalidOperationException ex)
+        //        {
+        //            return BadRequest("Wrong credentials");
+        //        }
 
           
 
-            }
-            if (string.Equals(model.UserType, "referee"))
-            {
+        //    }
+        //    if (string.Equals(model.UserType, "referee"))
+        //    {
 
-                try { 
-                var referee = _context.Referee.Include(x => x.Role).Where(x => x.Email == model.Email).Where(p => p.Password == model.Password).Single();
+        //        try { 
+        //        var referee = _context.Referee.Include(x => x.Role).Where(x => x.Email == model.Email).Where(p => p.Password == model.Password).Single();
 
-                    uModel = new UserModel
-                    {
-                        Id = referee.RefereeId,
-                        FullName = referee.FirstName + " " + referee.LastName,
-                        Email = referee.Email,
-                        UserType = "referee",
-                        UserRole = referee.Role.UserRole
-                    };
-                    return Ok(uModel);
-                } catch (InvalidOperationException ex)
-            {
-                return BadRequest("Wrong credentials");
-            }
-        }
+        //            uModel = new UserModel
+        //            {
+        //                Id = referee.RefereeId,
+        //                FullName = referee.FirstName + " " + referee.LastName,
+        //                Email = referee.Email,
+        //                UserType = "referee",
+        //                UserRole = referee.Role.UserRole
+        //            };
+        //            return Ok(uModel);
+        //        } catch (InvalidOperationException ex)
+        //    {
+        //        return BadRequest("Wrong credentials");
+        //    }
+        //}
 
-            return BadRequest("Wrong credentials");
+        //    return BadRequest("Wrong credentials");
         }
 
     }
