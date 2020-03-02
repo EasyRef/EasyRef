@@ -30,10 +30,10 @@ namespace EasyRefCore.Models
         public int? GameFieldSizeId { get; set; }
         public int? GameDivisionId { get; set; }
 
-        public  Coach Coach { get; set; }
-        public  Referee Referee { get; set; }
-        public Referee SecondReferee { get; set; }
-        public Referee ThirdReferee { get; set; }
+        public  ApplicationUser Coach { get; set; }
+        public ApplicationUser Referee { get; set; }
+        public ApplicationUser SecondReferee { get; set; }
+        public ApplicationUser ThirdReferee { get; set; }
         public  GameFieldSize GameFieldSize { get; set; }
 
         public  GameDivision GameDivision { get; set; }

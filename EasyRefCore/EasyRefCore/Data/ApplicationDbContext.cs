@@ -1,4 +1,5 @@
 ﻿using EasyRefCore.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EasyRefCore.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -22,8 +23,16 @@ namespace EasyRefCore.Data
             builder.Entity<ApplicationUser>().ToTable("Users");
 
 
-          
-            builder.Entity<Game>()
+            builder.Entity<IdentityRole<int>>().ToTable("Roles");
+
+
+
+
+            builder.Entity<IdentityUserRole<int>>().ToTable("UserRole");
+
+                
+
+                builder.Entity<Game>()
        .HasOne(q => q.Referee)
        .WithMany(x => x.GameReferee)
        .HasForeignKey(q => q.RefereeId)
@@ -65,8 +74,6 @@ namespace EasyRefCore.Data
 
 
 
-        public DbSet<Coach> Coach { get; set; }
-        public DbSet<Referee> Referee { get; set; }
         public DbSet<Game> Game { get; set; }
         public DbSet<GameFieldSize> GameFieldSize { get; set; }
         public DbSet<GameDivision> GameDivison { get; set; }

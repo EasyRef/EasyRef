@@ -2,7 +2,7 @@
 
 namespace EasyRefCore.Migrations
 {
-    public partial class Identity3 : Migration
+    public partial class Identity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

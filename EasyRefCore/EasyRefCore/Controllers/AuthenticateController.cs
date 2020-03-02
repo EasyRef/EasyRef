@@ -24,7 +24,7 @@ namespace EasyRefCore.Controllers
        
         public AuthenticateController(
             ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole<int>> roleManager,
             UserManager<ApplicationUser> userManager,
             IConfiguration configuration
             )
@@ -64,7 +64,7 @@ namespace EasyRefCore.Controllers
 
       
                 var claims = new[] {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat,
                         new DateTimeOffset(now).ToUnixTimeSeconds().ToString())

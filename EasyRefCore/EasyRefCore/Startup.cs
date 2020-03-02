@@ -36,7 +36,7 @@ namespace EasyRefCore
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(opts =>
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>(opts =>
             {
                 opts.Password.RequireDigit = true;
                 opts.Password.RequireLowercase = true;
@@ -110,7 +110,7 @@ namespace EasyRefCore
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole<int>>>();
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
                 dbContext.Database.Migrate();
                 DbSeeder.Seed(dbContext, roleManager, userManager);

@@ -3,31 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EasyRefCore.Migrations
 {
-    public partial class Identity1 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Coach_Role_RoleId",
-                table: "Coach");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Referee_Role_RoleId",
-                table: "Referee");
-
-            migrationBuilder.DropTable(
-                name: "Role");
-
-            migrationBuilder.AddColumn<string>(
-                name: "ApplicationUserId",
-                table: "Game",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -38,29 +23,84 @@ namespace EasyRefCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExtendedUserTypes",
+                name: "GameAge",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExtendedValue = table.Column<string>(nullable: true)
+                    Age = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExtendedUserTypes", x => x.Id);
+                    table.PrimaryKey("PK_GameAge", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserType",
+                name: "GameDivison",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(nullable: true)
+                    Division = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserType", x => x.Id);
+                    table.PrimaryKey("PK_GameDivison", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GameFieldSize",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FieldSize = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameFieldSize", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GameGender",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Gender = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameGender", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Compound = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,7 +109,7 @@ namespace EasyRefCore.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -85,55 +125,12 @@ namespace EasyRefCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    TypeId = table.Column<int>(nullable: false),
-                    PropertiesId = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Compound = table.Column<string>(nullable: true),
-                    Admin = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_ExtendedUserTypes_PropertiesId",
-                        column: x => x.PropertiesId,
-                        principalTable: "ExtendedUserTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_UserType_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "UserType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -141,9 +138,9 @@ namespace EasyRefCore.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_AspNetUserClaims_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -155,15 +152,15 @@ namespace EasyRefCore.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_AspNetUserLogins_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -172,8 +169,8 @@ namespace EasyRefCore.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,9 +182,9 @@ namespace EasyRefCore.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_AspNetUserRoles_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -196,7 +193,7 @@ namespace EasyRefCore.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -205,37 +202,79 @@ namespace EasyRefCore.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_AspNetUserTokens_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "ExtendedUserTypes",
-                columns: new[] { "Id", "ExtendedValue" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "Game",
+                columns: table => new
                 {
-                    { 1, "5 man" },
-                    { 2, "7 man" },
-                    { 3, "9 man" },
-                    { 4, "11 man" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserType",
-                columns: new[] { "Id", "Type" },
-                values: new object[,]
+                    GameId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CoachId = table.Column<int>(nullable: true),
+                    RefereeId = table.Column<int>(nullable: true),
+                    SecondRefereeId = table.Column<int>(nullable: true),
+                    ThirdRefereeId = table.Column<int>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    HomeTeam = table.Column<string>(nullable: true),
+                    AwayTeam = table.Column<string>(nullable: true),
+                    GameGenderId = table.Column<int>(nullable: false),
+                    GameAgeId = table.Column<int>(nullable: false),
+                    FieldLocation = table.Column<string>(nullable: true),
+                    GameFieldSizeId = table.Column<int>(nullable: true),
+                    GameDivisionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
                 {
-                    { 1, "Coach" },
-                    { 2, "Referee" }
+                    table.PrimaryKey("PK_Game", x => x.GameId);
+                    table.ForeignKey(
+                        name: "FK_Game_Users_CoachId",
+                        column: x => x.CoachId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Game_GameAge_GameAgeId",
+                        column: x => x.GameAgeId,
+                        principalTable: "GameAge",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Game_GameDivison_GameDivisionId",
+                        column: x => x.GameDivisionId,
+                        principalTable: "GameDivison",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Game_GameFieldSize_GameFieldSizeId",
+                        column: x => x.GameFieldSizeId,
+                        principalTable: "GameFieldSize",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Game_GameGender_GameGenderId",
+                        column: x => x.GameGenderId,
+                        principalTable: "GameGender",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Game_Users_RefereeId",
+                        column: x => x.RefereeId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Game_Users_SecondRefereeId",
+                        column: x => x.SecondRefereeId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Game_Users_ThirdRefereeId",
+                        column: x => x.ThirdRefereeId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Game_ApplicationUserId",
-                table: "Game",
-                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -265,66 +304,60 @@ namespace EasyRefCore.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Game_CoachId",
+                table: "Game",
+                column: "CoachId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_GameAgeId",
+                table: "Game",
+                column: "GameAgeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_GameDivisionId",
+                table: "Game",
+                column: "GameDivisionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_GameFieldSizeId",
+                table: "Game",
+                column: "GameFieldSizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_GameGenderId",
+                table: "Game",
+                column: "GameGenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_RefereeId",
+                table: "Game",
+                column: "RefereeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_SecondRefereeId",
+                table: "Game",
+                column: "SecondRefereeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_ThirdRefereeId",
+                table: "Game",
+                column: "ThirdRefereeId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "AspNetUsers",
+                table: "Users",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "AspNetUsers",
+                table: "Users",
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_PropertiesId",
-                table: "AspNetUsers",
-                column: "PropertiesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_TypeId",
-                table: "AspNetUsers",
-                column: "TypeId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Coach_UserType_RoleId",
-                table: "Coach",
-                column: "RoleId",
-                principalTable: "UserType",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Game_AspNetUsers_ApplicationUserId",
-                table: "Game",
-                column: "ApplicationUserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Referee_UserType_RoleId",
-                table: "Referee",
-                column: "RoleId",
-                principalTable: "UserType",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Coach_UserType_RoleId",
-                table: "Coach");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Game_AspNetUsers_ApplicationUserId",
-                table: "Game");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Referee_UserType_RoleId",
-                table: "Referee");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -341,53 +374,25 @@ namespace EasyRefCore.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Game");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "ExtendedUserTypes");
+                name: "GameAge");
 
             migrationBuilder.DropTable(
-                name: "UserType");
+                name: "GameDivison");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Game_ApplicationUserId",
-                table: "Game");
+            migrationBuilder.DropTable(
+                name: "GameFieldSize");
 
-            migrationBuilder.DropColumn(
-                name: "ApplicationUserId",
-                table: "Game");
-
-            migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserRole = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
-                });
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Coach_Role_RoleId",
-                table: "Coach",
-                column: "RoleId",
-                principalTable: "Role",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Referee_Role_RoleId",
-                table: "Referee",
-                column: "RoleId",
-                principalTable: "Role",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropTable(
+                name: "GameGender");
         }
     }
 }

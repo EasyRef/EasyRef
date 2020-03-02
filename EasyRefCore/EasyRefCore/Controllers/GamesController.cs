@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EasyRefCore.Data;
 using EasyRefCore.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace EasyRefCore.Controllers
 {
@@ -16,16 +17,20 @@ namespace EasyRefCore.Controllers
     public class GamesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GamesController(ApplicationDbContext context)
+        public GamesController(ApplicationDbContext context, RoleManager<IdentityRole<int>> role, UserManager<ApplicationUser> user)
         {
             _context = context;
+            _roleManager = role;
+            _userManager = user;
         }
 
         // GET: api/Games
        
         [HttpGet]
-        [Authorize]
+      //  [Authorize]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
             //Test
@@ -36,10 +41,11 @@ namespace EasyRefCore.Controllers
         [HttpGet("Referee/{id}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetGameForReferee(int id)
         {
-            var coach = await _context.Referee.Where(x => x.RefereeId == id).SingleAsync();
+            var coach = await _userManager.FindByIdAsync(id.ToString());
+        
 
-            return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender).Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach)
-                .Where(x => x.GameFieldSizeId <= coach.FieldSizeId).AsNoTracking().ToListAsync();
+            return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender)
+                .Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).AsNoTracking().ToListAsync();
             // return await _context.Game.ToListAsync();
         }
 

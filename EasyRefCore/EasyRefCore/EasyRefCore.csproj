@@ -5,60 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200130115152_Fifth.cs" />
-    <Compile Remove="Migrations\20200130115152_Fifth.Designer.cs" />
-    <Compile Remove="Migrations\20200130115502_Sixth.cs" />
-    <Compile Remove="Migrations\20200130115502_Sixth.Designer.cs" />
-    <Compile Remove="Migrations\20200130115645_Seven.cs" />
-    <Compile Remove="Migrations\20200130115645_Seven.Designer.cs" />
-    <Compile Remove="Migrations\20200130120046_eight.cs" />
-    <Compile Remove="Migrations\20200130120046_eight.Designer.cs" />
-    <Compile Remove="Migrations\20200130120602_Nine.cs" />
-    <Compile Remove="Migrations\20200130120602_Nine.Designer.cs" />
-    <Compile Remove="Migrations\20200130121331_Ten.cs" />
-    <Compile Remove="Migrations\20200130121331_Ten.Designer.cs" />
-    <Compile Remove="Migrations\20200130122018_Eleven.cs" />
-    <Compile Remove="Migrations\20200130122018_Eleven.Designer.cs" />
-    <Compile Remove="Migrations\20200130122546_Twelve.cs" />
-    <Compile Remove="Migrations\20200130122546_Twelve.Designer.cs" />
-    <Compile Remove="Migrations\20200130123016_nine.cs" />
-    <Compile Remove="Migrations\20200130123016_nine.Designer.cs" />
-    <Compile Remove="Migrations\20200130123812_eleven.cs" />
-    <Compile Remove="Migrations\20200130123812_eleven.Designer.cs" />
-    <Compile Remove="Migrations\20200130123953_twelve.cs" />
-    <Compile Remove="Migrations\20200130123953_twelve.Designer.cs" />
-    <Compile Remove="Migrations\20200130124047_thirt.cs" />
-    <Compile Remove="Migrations\20200130124047_thirt.Designer.cs" />
-    <Compile Remove="Migrations\20200130124544_forthy.cs" />
-    <Compile Remove="Migrations\20200130124544_forthy.Designer.cs" />
-    <Compile Remove="Migrations\20200131125907_Remake-2.cs" />
-    <Compile Remove="Migrations\20200131125907_Remake-2.Designer.cs" />
-    <Compile Remove="Migrations\20200131130814_Remake-2.cs" />
-    <Compile Remove="Migrations\20200131130814_Remake-2.Designer.cs" />
-    <Compile Remove="Migrations\20200131143409_Remake-7.cs" />
-    <Compile Remove="Migrations\20200131143409_Remake-7.Designer.cs" />
-    <Compile Remove="Migrations\20200203073001_SecondCreate.cs" />
-    <Compile Remove="Migrations\20200203073001_SecondCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200203082509_Remake-4.cs" />
-    <Compile Remove="Migrations\20200203082509_Remake-4.Designer.cs" />
-    <Compile Remove="Migrations\20200204093839_Version2_2.cs" />
-    <Compile Remove="Migrations\20200204093839_Version2_2.Designer.cs" />
-    <Compile Remove="Migrations\20200204100518_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200204100518_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200204102429_Remake-1.cs" />
-    <Compile Remove="Migrations\20200204102429_Remake-1.Designer.cs" />
-    <Compile Remove="Migrations\20200204102620_Remake-1.cs" />
-    <Compile Remove="Migrations\20200204102620_Remake-1.Designer.cs" />
-    <Compile Remove="Migrations\20200227141841_Identity-1.cs" />
-    <Compile Remove="Migrations\20200227141841_Identity-1.Designer.cs" />
-    <Compile Remove="Migrations\20200227143017_Identity-1.cs" />
-    <Compile Remove="Migrations\20200227143017_Identity-1.Designer.cs" />
-    <Compile Remove="Migrations\20200227143138_Identity-1.cs" />
-    <Compile Remove="Migrations\20200227143138_Identity-1.Designer.cs" />
-    <Compile Remove="Migrations\20200227143325_Identity-1.cs" />
-    <Compile Remove="Migrations\20200227143325_Identity-1.Designer.cs" />
-    <Compile Remove="Migrations\20200228082948_Identity-3.cs" />
-    <Compile Remove="Migrations\20200228082948_Identity-3.Designer.cs" />
+    <Compile Remove="Migrations\20200302080545_Identity.cs" />
+    <Compile Remove="Migrations\20200302080545_Identity.Designer.cs" />
+    <Compile Remove="Migrations\20200302112358_Identity-fieldsize.cs" />
+    <Compile Remove="Migrations\20200302112358_Identity-fieldsize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

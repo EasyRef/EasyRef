@@ -19,7 +19,7 @@ namespace EasyRefCore.Controllers
         #region Constructor
         public BaseApiController(
             ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole<int>> roleManager,
             UserManager<ApplicationUser> userManager,
             IConfiguration configuration
             )
@@ -41,7 +41,7 @@ namespace EasyRefCore.Controllers
 
         #region Shared Properties
         protected ApplicationDbContext DbContext { get; private set; }
-        protected RoleManager<IdentityRole> RoleManager { get; private set; }
+        protected RoleManager<IdentityRole<int>> RoleManager { get; private set; }
         protected UserManager<ApplicationUser> UserManager { get; private set; }
         protected IConfiguration Configuration { get; private set; }
         protected JsonSerializerSettings JsonSettings { get; private set; }
