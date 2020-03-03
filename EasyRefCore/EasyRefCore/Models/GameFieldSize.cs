@@ -12,6 +12,7 @@ namespace EasyRefCore.Models
 
         public int Id { get; set; }
         public int FieldSize { get; set; }
+        public ICollection<ApplicationUser> User { get; set; }
         public  ICollection<Game> Games { get; set; }
     }
 }

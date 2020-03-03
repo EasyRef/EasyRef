@@ -25,7 +25,7 @@ namespace EasyRefCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameGender>>> GetGameGender()
         {
-            return await _context.GameGender.ToListAsync();
+            return await _context.GameGender.Distinct().ToListAsync();
         }
 
         // GET: api/GameGenders/5

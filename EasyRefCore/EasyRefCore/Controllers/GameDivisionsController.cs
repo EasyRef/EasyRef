@@ -25,7 +25,7 @@ namespace EasyRefCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameDivision>>> GetGameDivison()
         {
-            return await _context.GameDivison.ToListAsync();
+            return await _context.GameDivison.Distinct().ToListAsync();
         }
 
         // GET: api/GameDivisions/5

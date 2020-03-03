@@ -25,7 +25,7 @@ namespace EasyRefCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameAge>>> GetGameAge()
         {
-            return await _context.GameAge.ToListAsync();
+            return await _context.GameAge.Distinct().ToListAsync();
         }
 
         // GET: api/GameAges/5

@@ -25,7 +25,7 @@ namespace EasyRefCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameFieldSize>>> GetGameFieldSize()
         {
-            return await _context.GameFieldSize.ToListAsync();
+            return await _context.GameFieldSize.Distinct().ToListAsync();
         }
 
         // GET: api/GameFieldSizes/5
