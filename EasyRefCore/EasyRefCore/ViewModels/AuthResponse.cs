@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 namespace EasyRefCore.ViewModels
 {
     public class AuthResponse
-    {
-       
-        public AuthResponse()
-        {
-
-        }
-      
+    {     
+        public AuthResponse() {} 
         public string Token { get; set; }
-        public int Expiration { get; set; }
-     
+        public int Expiration { get; set; }   
     }
 }

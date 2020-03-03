@@ -14,11 +14,19 @@ namespace EasyRefCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : BaseApiController
+    public class UserController : ControllerBase
     {
+        ApplicationDbContext _dbContext;
+        RoleManager<IdentityRole<int>> _roleManager;
+        UserManager<ApplicationUser> _userManager;
+      
+        public UserController( ApplicationDbContext context, RoleManager<IdentityRole<int>> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration){
 
-        public UserController( ApplicationDbContext context, RoleManager<IdentityRole<int>> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
-            : base(context, roleManager, userManager, configuration) { }
+            _dbContext = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
+
+        }
 
         string role_admin = "Admin";
         string role_coach = "Coach";
@@ -49,20 +57,20 @@ namespace EasyRefCore.Controllers
                     
 
                 };
-                var x = await UserManager.CreateAsync(user, model.Password);
+                var x = await _userManager.CreateAsync(user, model.Password);
                 if (model.IsAdmin)
                 {
-                    var xx = await UserManager.AddToRoleAsync(user, role_admin);
+                    var xx = await _userManager.AddToRoleAsync(user, role_admin);
                 
 
                 }
                 if (model.IsCoach)
                 {
-                    var xx = await UserManager.AddToRoleAsync(user, role_coach);
+                    var xx = await _userManager.AddToRoleAsync(user, role_coach);
                 }
                 if (model.IsReferee)
                 {
-                    var xx = await UserManager.AddToRoleAsync(user, role_referee);
+                    var xx = await _userManager.AddToRoleAsync(user, role_referee);
             
                     
                 }
@@ -70,7 +78,7 @@ namespace EasyRefCore.Controllers
                 user.EmailConfirmed = true;
                 user.LockoutEnabled = false;
 
-                await DbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
                 
 
@@ -87,12 +95,12 @@ namespace EasyRefCore.Controllers
 
         public async Task<ActionResult<UserModel>> GetCoaches()
         {
-            var users = await UserManager.Users.ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
             List<UserModel> user = new List<UserModel>();
 
             foreach (var item in users)
             {
-                var roles = await UserManager.GetRolesAsync(item);
+                var roles = await _userManager.GetRolesAsync(item);
 
                 if(roles.Contains("Coach"))
                 {
@@ -119,12 +127,12 @@ namespace EasyRefCore.Controllers
 
         public async Task<ActionResult<UserModel>> GetReferees()
         {
-            var users = await UserManager.Users.ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
             List<UserModel> user = new List<UserModel>();
 
             foreach (var item in users)
             {
-                var roles = await UserManager.GetRolesAsync(item);
+                var roles = await _userManager.GetRolesAsync(item);
 
                 if (roles.Contains("Referee"))
                 {
@@ -136,14 +144,9 @@ namespace EasyRefCore.Controllers
                         Compound = item.Compound,
                         Phone = item.PhoneNumber,
                         Email = item.Email
-
                     });
                 }
-
             }
-
-
-
             return Ok(user);
         }
 
@@ -151,12 +154,12 @@ namespace EasyRefCore.Controllers
 
         public async Task<ActionResult<UserModel>> GetAdmins()
         {
-            var users = await UserManager.Users.ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
             List<UserModel> user = new List<UserModel>();
 
             foreach (var item in users)
             {
-                var roles = await UserManager.GetRolesAsync(item);
+                var roles = await _userManager.GetRolesAsync(item);
 
                 if (roles.Contains("Admin"))
                 {
@@ -183,13 +186,13 @@ namespace EasyRefCore.Controllers
         public async Task<ActionResult<UserModel>> GetUser(int id)
         {
 
-            var users = await DbContext.UserRoles.ToListAsync();
+            var users = await _dbContext.UserRoles.ToListAsync();
 
            
             
-            var user = await DbContext.Users.Include(x => x.FieldSize).Where(x => x.Id == id).SingleOrDefaultAsync();
+            var user = await _dbContext.Users.Include(x => x.FieldSize).Where(x => x.Id == id).SingleOrDefaultAsync();
 
-            var roles = await UserManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
 
             UserModel returnUser = new UserModel
             {
@@ -231,7 +234,7 @@ namespace EasyRefCore.Controllers
         public async Task<ActionResult<UserModel>> PutUser(int Id, UserModel model)
         {
 
-            var user = await UserManager.FindByIdAsync(Id.ToString());
+            var user = await _userManager.FindByIdAsync(Id.ToString());
 
 
             user.UserName = model.UserName;
@@ -245,11 +248,11 @@ namespace EasyRefCore.Controllers
 
            
 
-            await UserManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
 
 
-            var updateuser = await UserManager.FindByIdAsync(user.Id.ToString());
-            var oldRole = await UserManager.GetRolesAsync(user);
+            var updateuser = await _userManager.FindByIdAsync(user.Id.ToString());
+            var oldRole = await _userManager.GetRolesAsync(user);
 
 
            
@@ -257,34 +260,34 @@ namespace EasyRefCore.Controllers
             if (model.IsAdmin && !oldRole.Contains("Admin"))
             {
 
-                await UserManager.AddToRoleAsync(updateuser, role_admin);
+                await _userManager.AddToRoleAsync(updateuser, role_admin);
             }
 
             if (!model.IsAdmin && oldRole.Contains("Admin"))
             {
 
-                await UserManager.RemoveFromRoleAsync(updateuser, role_admin);
+                await _userManager.RemoveFromRoleAsync(updateuser, role_admin);
             }
 
 
 
             if (model.IsCoach && !oldRole.Contains("Coach"))
             {
-                var xx = await UserManager.AddToRoleAsync(updateuser, role_coach);
+                var xx = await _userManager.AddToRoleAsync(updateuser, role_coach);
             }
             if (!model.IsCoach && oldRole.Contains("Coach"))
             {
-                await UserManager.RemoveFromRoleAsync(updateuser, role_coach);
+                await _userManager.RemoveFromRoleAsync(updateuser, role_coach);
             }
             if (model.IsReferee && !oldRole.Contains("Referee"))
             {
-                var xx = await UserManager.AddToRoleAsync(updateuser, role_referee);
+                var xx = await _userManager.AddToRoleAsync(updateuser, role_referee);
 
 
             }
             if (!model.IsReferee && oldRole.Contains("Referee"))
             {
-                await UserManager.RemoveFromRoleAsync(updateuser, role_referee);
+                await _userManager.RemoveFromRoleAsync(updateuser, role_referee);
 
 
             }
@@ -293,7 +296,7 @@ namespace EasyRefCore.Controllers
 
             try
             {
-                await DbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

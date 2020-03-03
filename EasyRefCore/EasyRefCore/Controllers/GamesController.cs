@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EasyRefCore.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GamesController : ControllerBase
@@ -30,23 +31,23 @@ namespace EasyRefCore.Controllers
         // GET: api/Games
        
         [HttpGet]
-      //  [Authorize]
+   
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
-            //Test
             return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender).Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).OrderBy(x => x.StartDate).AsNoTracking().ToListAsync();
-          // return await _context.Game.ToListAsync();
+    
         }
 
         [HttpGet("Referee/{id}")]
         public async Task<ActionResult<IEnumerable<Game>>> GetGameForReferee(int id)
         {
             var coach = await _userManager.FindByIdAsync(id.ToString());
+
+            var fieldSize = await _context.GameFieldSize.Where(x => x.Id == coach.FieldSizeId).SingleOrDefaultAsync();
         
 
             return await _context.Game.Include(x => x.GameFieldSize).Include(x => x.GameDivision).Include(x => x.GameAge).Include(x => x.GameGender)
-                .Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).AsNoTracking().ToListAsync();
-            // return await _context.Game.ToListAsync();
+                .Include(x => x.Referee).Include(x => x.SecondReferee).Include(x => x.ThirdReferee).Include(x => x.Coach).Where(x => x.GameFieldSize.FieldSize <= fieldSize.FieldSize).AsNoTracking().ToListAsync();
         }
 
 
@@ -64,10 +65,6 @@ namespace EasyRefCore.Controllers
 
             return game;
         }
-
-        // PUT: api/Games/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
 
         [HttpPut]
         public async Task<ActionResult<Game>> PutGame(Game game)
@@ -116,9 +113,6 @@ namespace EasyRefCore.Controllers
             return NoContent();
         }
 
-        // POST: api/Games
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Game>> PostGame(Game game)
         {

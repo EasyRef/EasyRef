@@ -73,12 +73,12 @@ namespace EasyRefCore.Data
             }
             if (!dbContext.Users.Any())
             {
-                CreateUsers(dbContext, roleManager, userManager).GetAwaiter().GetResult();
+                SeedRolesAndUser(dbContext, roleManager, userManager).GetAwaiter().GetResult();
               
             }
         }
 
-        private static async Task CreateUsers(ApplicationDbContext dbContext, RoleManager<IdentityRole<int>> roleManager, UserManager<ApplicationUser> userManager)
+        private static async Task SeedRolesAndUser(ApplicationDbContext dbContext, RoleManager<IdentityRole<int>> roleManager, UserManager<ApplicationUser> userManager)
         {
 
             string role_admin = "Admin";
@@ -103,11 +103,11 @@ namespace EasyRefCore.Data
             var admin_user = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-                FirstName = "Bertil",
+                FirstName = "Admin",
                 LastName = "Administrator",
-                Email = "admin@testref.com",
-                PhoneNumber = "0731236543",
-                UserName = "bertiladmin",
+                Email = "admin@admin.test",
+                PhoneNumber = "0731313371",
+                UserName = "admin",
 
             };
                   if (await userManager.FindByEmailAsync(admin_user.Email) == null )

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EasyRefCore.Data;
 using EasyRefCore.Models;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace EasyRefCore
             services.AddControllers();
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+      
 
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(opts =>
             {
@@ -84,6 +86,8 @@ namespace EasyRefCore
                    builder =>
                    builder.AllowAnyOrigin().AllowAnyMethod().WithHeaders("authorization", "accept", "content-type", "origin"));
             });
+
+           
 
            
 

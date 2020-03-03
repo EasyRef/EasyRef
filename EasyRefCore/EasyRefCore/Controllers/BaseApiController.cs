@@ -17,21 +17,16 @@ namespace EasyRefCore.Controllers
     public class BaseApiController : ControllerBase
     {
         #region Constructor
-        public BaseApiController(
-            ApplicationDbContext context,
-            RoleManager<IdentityRole<int>> roleManager,
-            UserManager<ApplicationUser> userManager,
-            IConfiguration configuration
-            )
+        public BaseApiController(ApplicationDbContext context, RoleManager<IdentityRole<int>> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
            
-            DbContext = context;
-            RoleManager = roleManager;
-            UserManager = userManager;
-            Configuration = configuration;
+            _dbContext = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
+            _configuration = configuration;
 
          
-            JsonSettings = new JsonSerializerSettings()
+            _jsonSettings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented
             };
@@ -40,11 +35,11 @@ namespace EasyRefCore.Controllers
         #endregion
 
         #region Shared Properties
-        protected ApplicationDbContext DbContext { get; private set; }
-        protected RoleManager<IdentityRole<int>> RoleManager { get; private set; }
-        protected UserManager<ApplicationUser> UserManager { get; private set; }
-        protected IConfiguration Configuration { get; private set; }
-        protected JsonSerializerSettings JsonSettings { get; private set; }
+        protected ApplicationDbContext _dbContext { get; private set; }
+        protected RoleManager<IdentityRole<int>> _roleManager { get; private set; }
+        protected UserManager<ApplicationUser> _userManager { get; private set; }
+        protected IConfiguration _configuration { get; private set; }
+        protected JsonSerializerSettings _jsonSettings { get; private set; }
         #endregion
     }
 

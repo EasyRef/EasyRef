@@ -18,17 +18,19 @@ namespace EasyRefCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticateController : BaseApiController
+    public class AuthenticateController : ControllerBase
+
     {
 
-       
-        public AuthenticateController(
-            ApplicationDbContext context,
-            RoleManager<IdentityRole<int>> roleManager,
-            UserManager<ApplicationUser> userManager,
-            IConfiguration configuration
-            )
-            : base(context, roleManager, userManager, configuration) { }
+        UserManager<ApplicationUser> _userManager;
+        IConfiguration _configuration;
+
+        public AuthenticateController(UserManager<ApplicationUser> userManager, IConfiguration configuration) {
+
+            
+            _userManager = userManager;
+            _configuration = configuration;
+        }
        
 
         [HttpPost("Auth")]
@@ -49,12 +51,12 @@ namespace EasyRefCore.Controllers
             try
             {
               
-                var user = await UserManager.FindByNameAsync(model.Username);
+                var user = await _userManager.FindByNameAsync(model.Username);
            
                 if (user == null && model.Username.Contains("@"))
-                    user = await UserManager.FindByEmailAsync(model.Username);
+                    user = await _userManager.FindByEmailAsync(model.Username);
 
-                if (user == null || !await UserManager.CheckPasswordAsync(user, model.Password))
+                if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 {
                  
                     return new UnauthorizedResult();
@@ -71,8 +73,8 @@ namespace EasyRefCore.Controllers
        
                 };
 
-                var tokenExpirationMins =  Configuration.GetValue<int>("Auth:Jwt:TokenExpirationInMinutes");
-                var issuerSigningKey = new SymmetricSecurityKey( Encoding.ASCII.GetBytes(Configuration["Auth:Jwt:Key"]));
+                var tokenExpirationMins =  _configuration.GetValue<int>("Auth:Jwt:TokenExpirationInMinutes");
+                var issuerSigningKey = new SymmetricSecurityKey( Encoding.ASCII.GetBytes(_configuration["Auth:Jwt:Key"]));
 
                 var token = new JwtSecurityToken(
                     claims: claims,
