@@ -32,6 +32,7 @@ namespace EasyRefCore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Coach>> GetCoach(int id)
         {
+            //int i = int.Parse(id);
             var coach = await _context.Coach.FindAsync(id);
 
             if (coach == null)
