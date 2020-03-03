@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <router-link class="nav-link" to="/games">Matcher</router-link>       
+        <router-link class="nav-link" to="/games" exact>Matcher</router-link>       
       </li>
       <li>
          <router-link class="nav-link" to="/calendar">Kalender</router-link>
@@ -24,11 +24,19 @@
       </li><li>
         <router-link class="nav-link" to="/referee">Domare</router-link>
         </li>
-
-    
+        <li>
+        <router-link class="nav-link" to="/Admin">Admin</router-link>
+        </li>  
+        <!-- <li>
+        <router-link class="nav-link" to="/UserDetails">AnvändarDetaljer</router-link>
+        </li>
+        <li>
+        <router-link class="nav-link" to="/ContactInfo">KontaktInfo</router-link>
+        </li>     -->
+        <li>
+        <router-link class="nav-link" to="/AddUser">Ny användare</router-link>
+        </li>
     </ul>
- 
-
   </div>
 </nav>
 </div>
@@ -53,6 +61,17 @@
   </footer>
 
 </div>
+<footer> 
+    <div class="container">
+      <div class="footer-items">
+      <router-link class="nav-link" to="/about">Om oss</router-link>
+       <router-link class="nav-link" to="/contact">Kontakt</router-link>
+        <router-link class="nav-link" to="/login">GDPR</router-link>
+       </div>
+    </div>
+  </footer>
+
+</div>
 
 </template>
 
@@ -63,13 +82,12 @@ export default {
   name: 'app',
   components: {
     AddGame
- 
   },
   data() {
     return {
-      title: process.env.VUE_APP_TITLE
+      title: process.env.VUE_APP_TITLE,
     }
-  }
+  },
 }
 </script>
 
@@ -159,13 +177,10 @@ body {
     color: white;
     text-transform: uppercase;
     border-radius: 6px;
-     margin-top: 0.5em;
-  margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     background-image: linear-gradient(var(--easyref-red),var(--easyref-bg-darken));
-
 /* background-image: linear-gradient(#b52d2d,#f53e3e); */
-
-
 }
 .timeGridDay-btn {
   color: var(--easyref-bg) !important;
@@ -173,8 +188,6 @@ body {
 .container {
   width: 100% !important;
   min-height: 100% !important;
-  
- 
 }
 
 .game-btn {
@@ -185,8 +198,7 @@ body {
 .header-color {
   background-color: var(--easyref-redBg);
   font-weight: bold;
-  text-transform: uppercase;
-  
+  text-transform: uppercase; 
 }
 
 .header-color a {
@@ -197,9 +209,7 @@ body {
   color: green !important;
 }
 
-
-.head-div h2  {
- 
+.head-div h2  { 
     text-transform: uppercase;
     font-size: 18px;
     padding: 20px;
@@ -211,8 +221,40 @@ body {
     margin-bottom: 2px;
     background-image: linear-gradient(var(--easyref-bg),var(--easyref-bg-darken));
 }
+
 .fc-day:hover {
   background: var(--easyref-bg) !important;
+}
+
+.fc-button {
+  background: var(--easyref-red) !important;
+  color: white !important;
+}
+
+.fc-center h2 {
+  text-transform: uppercase !important;
+}
+
+.fc-day-header {
+  background: var(--easyref-red) !important;
+  color: white !important;
+}
+
+.fc-time-grid-event {
+  background: var(--easyref-calFunc) !important;
+}
+
+.fc-content {
+  background: var(--easyref-calFunc) !important;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.router-link-active {
+  color: blue;
 }
 .fc-button {
   background: var(--easyref-red) !important;
