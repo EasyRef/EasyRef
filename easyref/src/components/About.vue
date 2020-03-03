@@ -47,5 +47,6 @@ export default {
 <style scoped>
 .router {
     color: white;
+    font-size: 3px
 }
 </style>
