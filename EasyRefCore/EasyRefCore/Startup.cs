@@ -29,12 +29,10 @@ namespace EasyRefCore
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-        // This method gets called by the runtime. Use this method to add services to the container.
+        readonly string appOrigins = "_appOrigins";
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
       
 
@@ -48,7 +46,7 @@ namespace EasyRefCore
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
             var key = Encoding.ASCII.GetBytes(Configuration["Auth:Jwt:Key"]);
-            // Add Authentication with JWT Tokens
+     
             services.AddAuthentication(opts =>
             {
     
@@ -60,16 +58,11 @@ namespace EasyRefCore
                 config.RequireHttpsMetadata = false;
                 config.SaveToken = true;
                 config.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    // standard configuration
+                {    
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-
-                   
+                    IssuerSigningKey = new SymmetricSecurityKey(key),  
                     ValidateAudience = false,
                     ValidateIssuer = false,
-                    
-   
                 };
                 
                 config.IncludeErrorDetails = true;
@@ -77,35 +70,26 @@ namespace EasyRefCore
 
             services.AddMvc(option => option.EnableEndpointRouting = false)
                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-
                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
             services.AddCors(options =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
+                options.AddPolicy(appOrigins,
                    builder =>
-                   builder.AllowAnyOrigin().AllowAnyMethod().WithHeaders("authorization", "accept", "content-type", "origin"));
+                   //builder.AllowAnyOrigin().AllowAnyMethod().WithHeaders("authorization", "accept", "content-type", "origin"));
+                   builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-
-           
-
-           
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(appOrigins);
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

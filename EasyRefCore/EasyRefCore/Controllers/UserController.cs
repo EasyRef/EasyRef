@@ -112,6 +112,7 @@ namespace EasyRefCore.Controllers
                         Compound = item.Compound,
                         Phone = item.PhoneNumber,
                         Email = item.Email
+                       
                         
                     });
                 }
@@ -192,6 +193,12 @@ namespace EasyRefCore.Controllers
             
             var user = await _dbContext.Users.Include(x => x.FieldSize).Where(x => x.Id == id).SingleOrDefaultAsync();
 
+            if (user == null)
+            {
+                return BadRequest();
+            }
+                
+
             var roles = await _userManager.GetRolesAsync(user);
 
             UserModel returnUser = new UserModel
@@ -201,9 +208,15 @@ namespace EasyRefCore.Controllers
                 Compound = user.Compound,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
-                UserName = user.UserName,
-                FieldSize = user.FieldSize.FieldSize
+                UserName = user.UserName
+                
             };
+
+            if(user.FieldSize != null)
+            {
+                returnUser.FieldSize = user.FieldSize.FieldSize;
+            }
+           
 
             if(roles.Contains("Admin"))
             {
@@ -228,6 +241,22 @@ namespace EasyRefCore.Controllers
             }
 
             return Ok(returnUser);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserModel>> DeleteUser(int id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if(user != null)
+            {
+                await _userManager.DeleteAsync(user);
+                return Ok();
+            }
+
+            return BadRequest();
+            
+            
         }
 
         [HttpPut("updateuser/{id}")]

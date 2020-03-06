@@ -23,12 +23,14 @@ namespace EasyRefCore.Controllers
     {
 
         UserManager<ApplicationUser> _userManager;
+        RoleManager<IdentityRole<int>> _roleManager;
         IConfiguration _configuration;
 
-        public AuthenticateController(UserManager<ApplicationUser> userManager, IConfiguration configuration) {
+        public AuthenticateController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<int>> roleManager, IConfiguration configuration) {
 
             
             _userManager = userManager;
+            _roleManager = roleManager;
             _configuration = configuration;
         }
        
@@ -87,7 +89,10 @@ namespace EasyRefCore.Controllers
                 var response = new AuthResponse()
                 {
                     Token = encodedToken,
-                    Expiration = tokenExpirationMins
+                    Expiration = tokenExpirationMins,
+                    UserId = user.Id,
+                    User = user.Email,
+                    UserRole = await _userManager.GetRolesAsync(user)
                 };
                 return Ok(response);
             }
